@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <corners
+        android:topLeftRadius="0dp"
+        android:topRightRadius="@dimen/plant_list_item_radius"
+        android:bottomLeftRadius="@dimen/plant_list_item_radius"
+        android:bottomRightRadius="0dp"/>
+
+
+        <solid android:color="@color/card_item_background"/>
+</shape>

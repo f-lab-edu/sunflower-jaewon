@@ -2,4 +2,7 @@
     <string name="app_name">Sunflower Clone</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_garden_item_planted">Planted</string>
+    <string name="my_garden_item_watered">Last Watered</string>
+    <string name="watering_need_format">water in %1$d days.</string>
 </resources>
