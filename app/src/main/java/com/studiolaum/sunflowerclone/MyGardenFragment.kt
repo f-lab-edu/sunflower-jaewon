@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.studiolaum.sunflowerclone.adapter.PlantListAdapter
 import com.studiolaum.sunflowerclone.databinding.FragmentMyGargenBinding
-import com.studiolaum.sunflowerclone.viewModels.MyGardenViewModel
+import com.studiolaum.sunflowerclone.viewmodels.MyGardenViewModel
 
 class MyGardenFragment : Fragment() {
     private val viewModel: MyGardenViewModel = MyGardenViewModel()

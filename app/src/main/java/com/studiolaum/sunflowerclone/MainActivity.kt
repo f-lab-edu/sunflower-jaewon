@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     private fun initPagerAndTabLayout() {
         val pager = binding.pager
         val tabLayout = binding.tabLayout
-        val tabLayoutTextList = listOf("MY GARDEN", "PLANT LIST")
+        val tabLayoutTextList =
+            listOf(getString(R.string.my_garden), getString(R.string.plant_list))
 
         pager.adapter = ScreenSlidePagerAdapter(this)
 
