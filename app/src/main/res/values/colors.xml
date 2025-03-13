@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="card_item_background">#FFFFFFFF</color>
+    <color name="detail_floating_button_background">#FFD261</color>
 </resources>

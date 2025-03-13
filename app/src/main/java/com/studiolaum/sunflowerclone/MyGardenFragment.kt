@@ -1,11 +1,14 @@
 package com.studiolaum.sunflowerclone
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.studiolaum.sunflowerclone.adapter.PlantListAdapter
+import androidx.core.os.bundleOf
+import com.studiolaum.sunflowerclone.adapter.MyGardenRecyclerAdapter
+import com.studiolaum.sunflowerclone.data.Plant
 import com.studiolaum.sunflowerclone.databinding.FragmentMyGargenBinding
 import com.studiolaum.sunflowerclone.viewmodels.MyGardenViewModel
 
@@ -25,7 +28,17 @@ class MyGardenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding.viewModel = viewModel
-        binding.gardenRecyclerView.adapter = PlantListAdapter()
+        val adapter = MyGardenRecyclerAdapter()
+        adapter.setOnItemClickListener(object : MyGardenRecyclerAdapter.OnItemClickEventListener {
+            override fun onItemClick(view: View, plant: Plant?) {
+                val fragmentManager = requireActivity().supportFragmentManager
+                fragmentManager.setFragmentResult("plantInfo", bundleOf("plant" to plant))
+                fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, DetailFragment())
+                    .commit()
+            }
+        })
+        binding.gardenRecyclerView.adapter = adapter
         return binding.root
     }
 }

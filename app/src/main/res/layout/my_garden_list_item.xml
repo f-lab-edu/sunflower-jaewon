@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/plant_list_item_shape"
+        android:clickable="true"
         android:orientation="vertical">
 
 
@@ -23,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/plant_list_photo_shape"
+            android:clickable="false"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
             android:src="@drawable/appleimage"
@@ -36,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:clickable="false"
             android:text="@{plant.name}"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"

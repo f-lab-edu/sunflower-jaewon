@@ -9,12 +9,21 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-@BindingAdapter("plantList")
+@BindingAdapter("plants")
 fun bindGardenRecyclerView(
     view: RecyclerView,
     data: List<Plant>,
 ) {
-    val adapter = view.adapter as PlantListAdapter
+    val adapter = view.adapter as MyGardenRecyclerAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("plantList")
+fun bindPlantListRecyclerView(
+    view: RecyclerView,
+    data: List<Plant>,
+) {
+    val adapter = view.adapter as PlantListRecyclerAdapter
     adapter.submitList(data)
 }
 
