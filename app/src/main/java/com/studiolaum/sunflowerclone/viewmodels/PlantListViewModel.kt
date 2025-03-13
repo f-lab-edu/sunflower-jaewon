@@ -1,4 +1,4 @@
-package com.studiolaum.sunflowerclone.viewModels
+package com.studiolaum.sunflowerclone.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.map
 import com.studiolaum.sunflowerclone.data.Plant
 import java.util.Calendar
 
-class MyGardenViewModel : ViewModel() {
+class PlantListViewModel : ViewModel() {
     private val _plantList = MutableLiveData<MutableList<Plant>>()
 
     val plantList: LiveData<List<Plant>>
