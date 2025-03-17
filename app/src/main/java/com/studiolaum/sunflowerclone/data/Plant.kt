@@ -9,5 +9,6 @@ data class Plant(
     val wateringNeeds: Int,
     val description: String,
     val plantedTimeMilli: Long,
-    val lastWateredTimeMilli: Long
+    val lastWateredTimeMilli: Long,
+    val url: String,
 ) : Parcelable

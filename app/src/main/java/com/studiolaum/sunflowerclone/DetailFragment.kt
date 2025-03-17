@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import com.google.android.material.appbar.AppBarLayout
 import com.studiolaum.sunflowerclone.data.Plant
 import com.studiolaum.sunflowerclone.databinding.FragmentDetailBinding
 import kotlin.math.abs
@@ -40,21 +39,21 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding.appbarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.appbarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val threshold = (appBarLayout.totalScrollRange * 0.9).toInt()
             val isCollapsed = abs(verticalOffset) >= threshold
             binding.appbarText.visibility = if (isCollapsed) View.VISIBLE else View.INVISIBLE
-        })
+        }
         requireActivity().supportFragmentManager.setFragmentResultListener(
             "plantInfo",
             this
         ) { _, bundle ->
             val plant = bundle.getParcelable<Plant>("plant")
-            binding.appbarText.text = plant?.name ?: "null"
-            binding.plantNameText.text = plant?.name ?: "null"
+            binding.plant = plant
 
             binding.floatingButton.setOnClickListener {
-                Toast.makeText(requireContext(), "This is ${plant?.name}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "This is ${plant?.name}", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
