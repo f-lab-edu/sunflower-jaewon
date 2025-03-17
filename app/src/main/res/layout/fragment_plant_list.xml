@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".PlantListFragment">
+<layout>
 
-    <TextView
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.studiolaum.sunflowerclone.viewmodels.PlantListViewModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00695C"
-        android:gravity="center"
-        android:text="Plant List Fragment"
-        android:textColor="@color/white"
-        android:textSize="24sp" />
+        tools:context=".PlantListFragment">
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/plant_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="10dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            app:plantList="@{viewModel.plantList}"
+            tools:itemCount="10"
+            tools:listitem="@layout/plant_list_item" />
+
+    </FrameLayout>
+</layout>

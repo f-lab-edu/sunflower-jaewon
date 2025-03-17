@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.studiolaum.sunflowerclone.data.Plant
-import com.studiolaum.sunflowerclone.databinding.MyGardenListItemBinding
+import com.studiolaum.sunflowerclone.databinding.PlantListItemBinding
 
-class MyGardenRecyclerAdapter :
-    ListAdapter<Plant, MyGardenRecyclerAdapter.PlantViewHolder>(DiffCallback) {
+class PlantListRecyclerAdapter :
+    ListAdapter<Plant, PlantListRecyclerAdapter.PlantViewHolder>(DiffCallback) {
 
     interface OnItemClickEventListener {
         fun onItemClick(view: View, plant: Plant?)
@@ -23,7 +23,7 @@ class MyGardenRecyclerAdapter :
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int) = PlantViewHolder(
-        MyGardenListItemBinding.inflate(
+        PlantListItemBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )
     )
@@ -44,7 +44,7 @@ class MyGardenRecyclerAdapter :
         }
     }
 
-    inner class PlantViewHolder(private val binding: MyGardenListItemBinding) :
+    inner class PlantViewHolder(private val binding: PlantListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {

@@ -11,6 +11,7 @@
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/my_garden_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MyGardenFragment">
@@ -21,7 +22,7 @@
             android:layout_height="match_parent"
             android:paddingHorizontal="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:plantList="@{viewModel.plantList}"
+            app:plants="@{viewModel.plantList}"
             app:spanCount="2"
             tools:itemCount="10"
             tools:listitem="@layout/my_garden_list_item" />

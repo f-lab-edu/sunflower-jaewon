@@ -8,7 +8,7 @@ import com.studiolaum.sunflowerclone.data.Plant
 import java.util.Calendar
 
 class MyGardenViewModel : ViewModel() {
-    private val _plantList = MutableLiveData<MutableList<Plant>>()
+    private val _plantList = MutableLiveData<MutableList<Plant>>(mutableListOf())
 
     val plantList: LiveData<List<Plant>>
         get() = _plantList.map { it.toList() }
