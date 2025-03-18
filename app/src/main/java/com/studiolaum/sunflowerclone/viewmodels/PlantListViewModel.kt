@@ -22,7 +22,8 @@ class PlantListViewModel : ViewModel() {
                 (25 + it) % 30,
                 "this is apple$it",
                 date.timeInMillis,
-                date.timeInMillis
+                date.timeInMillis,
+                ""
             )
         }
     }

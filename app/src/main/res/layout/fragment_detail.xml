@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="plant"
+            type="com.studiolaum.sunflowerclone.data.Plant" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -31,7 +38,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/appleimage"
+                        app:imageUrl="@{plant.url}"
                         app:layout_collapseMode="parallax"
                         tools:src="@drawable/appleimage" />
 
@@ -41,6 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="15dp"
                         android:gravity="center"
+                        android:text="@{plant.name}"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_collapseMode="parallax"
@@ -59,6 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:text="@{plant.name}"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:visibility="invisible"
@@ -91,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    app:detailWaterNeeds="@{plant.wateringNeeds}"
                     android:gravity="center"
                     tools:text="every 30 days" />
 
@@ -111,10 +121,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/detail_floating_button_background"
             android:src="@drawable/baseline_add_24"
             app:layout_anchor="@id/plant_image"
             app:layout_anchorGravity="bottom|end"
-            android:backgroundTint="@color/detail_floating_button_background"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
