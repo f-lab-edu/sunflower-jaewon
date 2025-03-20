@@ -34,7 +34,8 @@ class MyGardenFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 fragmentManager.setFragmentResult("plantInfo", bundleOf("plant" to plant))
                 fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, DetailFragment())
+                    .add(R.id.fragment_container_view, DetailFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })

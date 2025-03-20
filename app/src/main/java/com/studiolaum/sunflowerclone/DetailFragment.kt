@@ -17,19 +17,6 @@ class DetailFragment : Fragment() {
         FragmentDetailBinding.inflate(layoutInflater)
             .apply { lifecycleOwner = this@DetailFragment }
     }
-    private val backPressedCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragment_container_view, PagerFragment())
-                .commit()
-        }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        requireActivity().onBackPressedDispatcher.addCallback(backPressedCallback)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,17 +39,14 @@ class DetailFragment : Fragment() {
             binding.plant = plant
 
             binding.floatingButton.setOnClickListener {
-                Toast.makeText(requireContext(), "This is ${plant?.name}", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.float_button_msg_format, plant?.name), Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
 
         return binding.root
-    }
-
-
-    override fun onDetach() {
-        super.onDetach()
-        backPressedCallback.remove()
     }
 }
