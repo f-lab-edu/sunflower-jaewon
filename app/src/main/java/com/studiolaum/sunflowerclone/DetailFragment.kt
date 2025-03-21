@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import com.studiolaum.sunflowerclone.data.Plant
 import com.studiolaum.sunflowerclone.databinding.FragmentDetailBinding
+import com.studiolaum.sunflowerclone.viewmodels.MyGardenViewModel
 import kotlin.math.abs
 
 class DetailFragment : Fragment() {
+    private val myGardenViewModel: MyGardenViewModel by activityViewModels()
     private val binding by lazy {
         FragmentDetailBinding.inflate(layoutInflater)
             .apply { lifecycleOwner = this@DetailFragment }
@@ -37,16 +41,32 @@ class DetailFragment : Fragment() {
         ) { _, bundle ->
             val plant = bundle.getParcelable<Plant>("plant")
             binding.plant = plant
-
-            binding.floatingButton.setOnClickListener {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.float_button_msg_format, plant?.name), Toast.LENGTH_SHORT
-                )
-                    .show()
+            plant?.let {
+                val isPlantInGarden = myGardenViewModel.isGardenPlant(plant.id)
+                if (isPlantInGarden) {
+                    binding.floatingButton.visibility = View.GONE
+                } else {
+                    setFloatingButtonClickListener(plant)
+                }
             }
         }
-
         return binding.root
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(
+            requireContext(),
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun setFloatingButtonClickListener(plant: Plant) {
+        binding.floatingButton.setOnClickListener {
+            myGardenViewModel.insertGardenPlant(plant.id) {
+                showToast(getString(R.string.float_button_msg_format))
+                binding.floatingButton.visibility = View.GONE
+            }
+        }
     }
 }

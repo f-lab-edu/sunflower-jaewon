@@ -36,7 +36,7 @@ class PlantListRecyclerAdapter :
 
     companion object DiffCallback : DiffUtil.ItemCallback<Plant>() {
         override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {

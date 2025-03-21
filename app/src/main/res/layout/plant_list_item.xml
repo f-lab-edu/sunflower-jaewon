@@ -24,7 +24,7 @@
             android:background="@drawable/plant_list_photo_shape"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/appleimage"
+            app:imageUrl="@{plant.url}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
