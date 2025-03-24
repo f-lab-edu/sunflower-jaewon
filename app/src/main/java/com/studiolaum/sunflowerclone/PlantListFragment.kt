@@ -7,14 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.room.Room
 import com.studiolaum.sunflowerclone.adapter.PlantListRecyclerAdapter
-import com.studiolaum.sunflowerclone.data.AppDatabase
 import com.studiolaum.sunflowerclone.data.Plant
-import com.studiolaum.sunflowerclone.data.PlantRepository
-import com.studiolaum.sunflowerclone.data.createDatabase
 import com.studiolaum.sunflowerclone.databinding.FragmentPlantListBinding
-import com.studiolaum.sunflowerclone.network.UnsplashApi
 import com.studiolaum.sunflowerclone.viewmodels.PlantListViewModel
 
 class PlantListFragment : Fragment() {
