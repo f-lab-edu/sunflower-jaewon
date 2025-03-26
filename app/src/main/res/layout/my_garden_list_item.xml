@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="plant"
-            type="com.studiolaum.sunflowerclone.data.Plant" />
+            name="gardenPlant"
+            type="com.studiolaum.sunflowerclone.data.GardenPlantWithPlantInfo" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/plant_list_item_shape"
+        android:clickable="true"
         android:orientation="vertical">
 
 
@@ -23,9 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/plant_list_photo_shape"
+            android:clickable="false"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/appleimage"
+            app:imageUrl="@{gardenPlant.plant.url}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/appleimage" />
 
         <TextView
@@ -33,40 +38,57 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="@{plant.name}"
+            android:clickable="false"
+            android:text="@{gardenPlant.plant.name}"
             android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view"
             tools:text="Apple" />
 
         <TextView
+            android:id="@+id/planted_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:text="@string/my_garden_item_planted"
             android:textAlignment="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/plant_name_text" />
 
         <TextView
             android:id="@+id/planted_date_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            app:dateTimeMilli="@{plant.plantedTimeMilli}"
+            app:dateTimeMilli="@{gardenPlant.gardenPlant.plantedTimeMilli}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/planted_text_view"
             tools:text="Mar 10, 2025" />
 
         <TextView
+            android:id="@+id/last_watered_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/my_garden_item_watered"
             android:textAlignment="center"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planted_date_text" />
 
         <TextView
             android:id="@+id/last_watered_date_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            app:dateTimeMilli="@{plant.lastWateredTimeMilli}"
+            app:dateTimeMilli="@{gardenPlant.gardenPlant.lastWateredTimeMilli}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_watered_text_view"
             tools:text="Mar 10, 2025" />
 
         <TextView
@@ -75,8 +97,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:textAlignment="center"
-            app:wateringNeeds="@{plant.wateringNeeds}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/last_watered_date_text"
+            app:wateringNeeds="@{gardenPlant.plant.wateringNeeds}"
             tools:text="water in 30 days." />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
