@@ -3,9 +3,13 @@ package com.studiolaum.sunflowerclone.data
 import com.studiolaum.sunflowerclone.network.UnsplashApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class PlantRepository(private val unsplashApi: UnsplashApi, private val db: PlantDao) {
+class PlantRepository @Inject constructor(
+    private val unsplashApi: UnsplashApi,
+    private val db: PlantDao
+) {
     suspend fun getPlantList(): List<Plant> {
         var plants = db.getAllPlant()
         if (plants.isEmpty()) {
@@ -59,7 +63,7 @@ class PlantRepository(private val unsplashApi: UnsplashApi, private val db: Plan
     private suspend fun getPhotoUrl(searchTerm: String = "apple"): String {
         var url = ""
         try {
-            val photo = unsplashApi.unsplashService.searchPhoto(searchTerm, 3).results.first()
+            val photo = unsplashApi.searchPhoto(searchTerm, 3).results.first()
             url = photo.urls.small
         } catch (e: Exception) {
             e.printStackTrace()

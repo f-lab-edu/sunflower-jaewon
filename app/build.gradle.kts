@@ -6,6 +6,8 @@ plugins {
     id("org.jetbrains.kotlin.kapt")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -69,10 +71,15 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.14.2")
 
     implementation("androidx.room:room-runtime:2.6.1")
-
     ksp("androidx.room:room-compiler:2.6.1")
-
     annotationProcessor("androidx.room:room-compiler:2.6.1")
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 fun getLocalProperty(key: String): String {

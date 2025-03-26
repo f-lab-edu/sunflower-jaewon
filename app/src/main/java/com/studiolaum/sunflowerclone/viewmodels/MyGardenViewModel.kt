@@ -3,16 +3,18 @@ package com.studiolaum.sunflowerclone.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.studiolaum.sunflowerclone.data.GardenPlantWithPlantInfo
 import com.studiolaum.sunflowerclone.data.PlantRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class MyGardenViewModel(private val plantRepository: PlantRepository) : ViewModel() {
+@HiltViewModel
+class MyGardenViewModel @Inject constructor(private val plantRepository: PlantRepository) :
+    ViewModel() {
     private val _gardenPlantList =
         MutableLiveData<MutableList<GardenPlantWithPlantInfo>>(mutableListOf())
 
@@ -37,13 +39,4 @@ class MyGardenViewModel(private val plantRepository: PlantRepository) : ViewMode
 
     fun isGardenPlant(plantId: Long) =
         _gardenPlantList.value?.any { it.plant.id == plantId } ?: false
-}
-
-class MyGardenViewModelFactory(
-    private val plantRepository: PlantRepository
-) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MyGardenViewModel(plantRepository) as T
-    }
 }
