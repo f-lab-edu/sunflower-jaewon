@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="plant"
-            type="com.studiolaum.sunflowerclone.data.Plant" />
+            name="gardenPlant"
+            type="com.studiolaum.sunflowerclone.data.GardenPlantWithPlantInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             android:clickable="false"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            app:imageUrl="@{plant.url}"
+            app:imageUrl="@{gardenPlant.plant.url}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:clickable="false"
-            android:text="@{plant.name}"
+            android:text="@{gardenPlant.plant.name}"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            app:dateTimeMilli="@{plant.plantedTimeMilli}"
+            app:dateTimeMilli="@{gardenPlant.gardenPlant.plantedTimeMilli}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/planted_text_view"
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            app:dateTimeMilli="@{plant.lastWateredTimeMilli}"
+            app:dateTimeMilli="@{gardenPlant.gardenPlant.lastWateredTimeMilli}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/last_watered_text_view"
@@ -101,7 +101,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/last_watered_date_text"
-            app:wateringNeeds="@{plant.wateringNeeds}"
+            app:wateringNeeds="@{gardenPlant.plant.wateringNeeds}"
             tools:text="water in 30 days." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

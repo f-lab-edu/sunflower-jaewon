@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:paddingHorizontal="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:plants="@{viewModel.plantList}"
+            app:gardenPlants="@{viewModel.gardenPlantList}"
             app:spanCount="2"
             tools:itemCount="10"
             tools:listitem="@layout/my_garden_list_item" />

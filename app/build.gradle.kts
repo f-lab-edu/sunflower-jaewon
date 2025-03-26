@@ -1,5 +1,3 @@
-import com.android.build.api.dsl.AaptOptions
-import com.android.build.api.dsl.AndroidResources
 import java.util.Properties
 
 plugins {
@@ -7,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -59,6 +58,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.6")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
@@ -66,6 +67,12 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     implementation("com.github.bumptech.glide:glide:4.14.2")
+
+    implementation("androidx.room:room-runtime:2.6.1")
+
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
 }
 
 fun getLocalProperty(key: String): String {

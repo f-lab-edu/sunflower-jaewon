@@ -6,15 +6,16 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.studiolaum.sunflowerclone.R
+import com.studiolaum.sunflowerclone.data.GardenPlantWithPlantInfo
 import com.studiolaum.sunflowerclone.data.Plant
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-@BindingAdapter("plants")
+@BindingAdapter("gardenPlants")
 fun bindGardenRecyclerView(
     view: RecyclerView,
-    data: List<Plant>,
+    data: List<GardenPlantWithPlantInfo>,
 ) {
     val adapter = view.adapter as MyGardenRecyclerAdapter
     adapter.submitList(data)

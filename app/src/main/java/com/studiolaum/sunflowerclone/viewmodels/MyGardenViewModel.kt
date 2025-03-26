@@ -3,63 +3,47 @@ package com.studiolaum.sunflowerclone.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.studiolaum.sunflowerclone.data.Plant
-import com.studiolaum.sunflowerclone.network.UnsplashApi
+import com.studiolaum.sunflowerclone.data.GardenPlantWithPlantInfo
+import com.studiolaum.sunflowerclone.data.PlantRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.Calendar
 
-class MyGardenViewModel : ViewModel() {
-    private val _plantList = MutableLiveData<MutableList<Plant>>(mutableListOf())
 
-    val plantList: LiveData<List<Plant>>
-        get() = _plantList.map { it.toList() }
+class MyGardenViewModel(private val plantRepository: PlantRepository) : ViewModel() {
+    private val _gardenPlantList =
+        MutableLiveData<MutableList<GardenPlantWithPlantInfo>>(mutableListOf())
+
+    val gardenPlantList: LiveData<List<GardenPlantWithPlantInfo>>
+        get() = _gardenPlantList.map { it.toList() }
 
     init {
-        val date = Calendar.getInstance()
-        _plantList.value = MutableList(10) {
-            date.add(Calendar.DAY_OF_MONTH, 1)
-            Plant(
-                "apple$it",
-                (25 + it) % 30,
-                "this is apple$it",
-                date.timeInMillis,
-                date.timeInMillis,
-                ""
-            )
-
-        }
-        viewModelScope.launch {
-            initPhotoUrl()
+        viewModelScope.launch(Dispatchers.IO) {
+            val gardenPlants = plantRepository.getGardenPlantList()
+            _gardenPlantList.postValue(gardenPlants.toMutableList())
         }
     }
 
-    private suspend fun initPhotoUrl() {
-        withContext(Dispatchers.IO) {
-            val urls = List(_plantList.value?.size ?: 0) {
-                getPhotoUrl()
-            }
-
-            _plantList.postValue(
-                _plantList.value?.mapIndexed { index, plant ->
-                    plant.copy(url = urls[index])
-                }?.toMutableList()
-            )
+    fun insertGardenPlant(plantId: Long, callback: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            plantRepository.insertGardenPlant(plantId)
+            val gardenPlants = plantRepository.getGardenPlantList()
+            _gardenPlantList.postValue(gardenPlants.toMutableList())
+            launch(Dispatchers.Main) { callback() }
         }
     }
 
+    fun isGardenPlant(plantId: Long) =
+        _gardenPlantList.value?.any { it.plant.id == plantId } ?: false
+}
 
-    private suspend fun getPhotoUrl(searchTerm: String = "apple"): String {
-        var url = ""
-        try {
-            val photo = UnsplashApi.unsplashService.searchPhoto(searchTerm, 3).results.first()
-            url = photo.urls.small
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return url
+class MyGardenViewModelFactory(
+    private val plantRepository: PlantRepository
+) : ViewModelProvider.Factory {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return MyGardenViewModel(plantRepository) as T
     }
 }

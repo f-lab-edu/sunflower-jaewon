@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.studiolaum.sunflowerclone.data.GardenPlantWithPlantInfo
 import com.studiolaum.sunflowerclone.data.Plant
 import com.studiolaum.sunflowerclone.databinding.MyGardenListItemBinding
 
 class MyGardenRecyclerAdapter :
-    ListAdapter<Plant, MyGardenRecyclerAdapter.PlantViewHolder>(DiffCallback) {
+    ListAdapter<GardenPlantWithPlantInfo, MyGardenRecyclerAdapter.PlantViewHolder>(DiffCallback) {
 
     interface OnItemClickEventListener {
         fun onItemClick(view: View, plant: Plant?)
@@ -34,13 +35,19 @@ class MyGardenRecyclerAdapter :
         viewHolder.bind(plant)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Plant>() {
-        override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
-            return oldItem == newItem
+    companion object DiffCallback : DiffUtil.ItemCallback<GardenPlantWithPlantInfo>() {
+        override fun areItemsTheSame(
+            oldItem: GardenPlantWithPlantInfo,
+            newItem: GardenPlantWithPlantInfo
+        ): Boolean {
+            return oldItem.gardenPlant.id == newItem.gardenPlant.id
         }
 
-        override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(
+            oldItem: GardenPlantWithPlantInfo,
+            newItem: GardenPlantWithPlantInfo
+        ): Boolean {
+            return oldItem.gardenPlant == newItem.gardenPlant
         }
     }
 
@@ -50,13 +57,13 @@ class MyGardenRecyclerAdapter :
         init {
             itemClickListener?.let { onItemClickListener ->
                 binding.root.setOnClickListener {
-                    onItemClickListener.onItemClick(it, binding.plant)
+                    onItemClickListener.onItemClick(it, binding.gardenPlant?.plant)
                 }
             }
         }
 
-        fun bind(plant: Plant) {
-            binding.plant = plant
+        fun bind(gardenPlant: GardenPlantWithPlantInfo) {
+            binding.gardenPlant = gardenPlant
         }
     }
 }

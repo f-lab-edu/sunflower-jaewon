@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
+import androidx.room.Room
 import com.studiolaum.sunflowerclone.adapter.PlantListRecyclerAdapter
+import com.studiolaum.sunflowerclone.data.AppDatabase
 import com.studiolaum.sunflowerclone.data.Plant
+import com.studiolaum.sunflowerclone.data.PlantRepository
+import com.studiolaum.sunflowerclone.data.createDatabase
 import com.studiolaum.sunflowerclone.databinding.FragmentPlantListBinding
+import com.studiolaum.sunflowerclone.network.UnsplashApi
 import com.studiolaum.sunflowerclone.viewmodels.PlantListViewModel
 
 class PlantListFragment : Fragment() {
-    private val viewModel = PlantListViewModel()
+    private val viewModel: PlantListViewModel by activityViewModels()
     private val binding by lazy {
         FragmentPlantListBinding.inflate(layoutInflater)
             .apply { lifecycleOwner = this@PlantListFragment }
@@ -33,7 +39,8 @@ class PlantListFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 fragmentManager.setFragmentResult("plantInfo", bundleOf("plant" to plant))
                 fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, DetailFragment())
+                    .add(R.id.fragment_container_view, DetailFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })

@@ -1,19 +1,19 @@
 package com.studiolaum.sunflowerclone
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import com.studiolaum.sunflowerclone.adapter.MyGardenRecyclerAdapter
 import com.studiolaum.sunflowerclone.data.Plant
 import com.studiolaum.sunflowerclone.databinding.FragmentMyGargenBinding
 import com.studiolaum.sunflowerclone.viewmodels.MyGardenViewModel
 
 class MyGardenFragment : Fragment() {
-    private val viewModel: MyGardenViewModel = MyGardenViewModel()
+    private val viewModel: MyGardenViewModel by activityViewModels()
     private val binding by lazy {
         FragmentMyGargenBinding.inflate(layoutInflater)
             .apply { lifecycleOwner = this@MyGardenFragment }
@@ -34,7 +34,8 @@ class MyGardenFragment : Fragment() {
                 val fragmentManager = requireActivity().supportFragmentManager
                 fragmentManager.setFragmentResult("plantInfo", bundleOf("plant" to plant))
                 fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, DetailFragment())
+                    .add(R.id.fragment_container_view, DetailFragment())
+                    .addToBackStack(null)
                     .commit()
             }
         })
